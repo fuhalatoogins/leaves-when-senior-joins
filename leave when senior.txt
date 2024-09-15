@@ -1,0 +1,29 @@
+for _,Player in pairs(game.Teams:WaitForChild("HRs"):GetPlayers()) do
+	if table.find(userids,Player.UserId) then
+		local message = "An HR or MR+ member has been detected, leaving to evade a server ban or pban..."
+
+		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+
+		game:GetService("RunService").RenderStepped:Connect(function()
+			local teleportService = game:GetService("TeleportService")
+			teleportService:Teleport(teleportPlaceId, game.Players.LocalPlayer)
+
+		end)
+	end
+end
+
+
+
+game.Teams:WaitForChild("HRs").PlayerAdded:Connect(function(Player)
+	if table.find(userids,Player.UserId) then
+		local message = "An HR or MR+ member has been detected, leaving to evade a server ban or pban..."
+
+		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+
+		game:GetService("RunService").RenderStepped:Connect(function()
+			local teleportService = game:GetService("TeleportService")
+			teleportService:Teleport(teleportPlaceId, game.Players.LocalPlayer)
+
+		end)
+	end
+end)
