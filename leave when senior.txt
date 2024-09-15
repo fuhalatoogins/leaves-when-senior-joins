@@ -1,3 +1,41 @@
+
+local teleportPlaceId = 4483381587
+
+local useridsres = game:HttpGet("https://raw.githubusercontent.com/moon6007/Scripts/main/rp%20games/bloxton/MR%2BHR%20userids%20auto%20update")
+
+local userids = game:GetService("HttpService"):JSONDecode(useridsres)
+
+for _,Player in pairs(game.Teams:WaitForChild("MRs"):GetPlayers()) do
+	if table.find(userids,Player.UserId) then
+		local message = "An HR or MR+ member has been detected, leaving to evade a server ban or pban..."
+
+		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+
+		game:GetService("RunService").RenderStepped:Connect(function()
+			local teleportService = game:GetService("TeleportService")
+			teleportService:Teleport(teleportPlaceId, game.Players.LocalPlayer)
+
+		end)
+	end
+end
+
+
+
+game.Teams:WaitForChild("MRs").PlayerAdded:Connect(function(Player)
+	if table.find(userids,Player.UserId) then
+		local message = "An HR or MR+ member has been detected, leaving to evade a server ban or pban..."
+
+		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+
+		game:GetService("RunService").RenderStepped:Connect(function()
+			local teleportService = game:GetService("TeleportService")
+			teleportService:Teleport(teleportPlaceId, game.Players.LocalPlayer)
+
+		end)
+	end
+end)
+
+
 for _,Player in pairs(game.Teams:WaitForChild("HRs"):GetPlayers()) do
 	if table.find(userids,Player.UserId) then
 		local message = "An HR or MR+ member has been detected, leaving to evade a server ban or pban..."
